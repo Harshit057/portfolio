@@ -1,0 +1,1372 @@
+/* GENERAL*/
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+} 
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: 
+        radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 25%, #0f0f23 50%, #0a0a0a 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    perspective: 1000px;
+}
+
+/* 3D SOLAR SYSTEM BACKGROUND - CENTERED */
+.solar-system {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+/* SUN - CENTERED */
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 50%, #ff5722 100%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 60px #ffeb3b,
+        0 0 120px #ff9800,
+        0 0 180px #ff5722;
+    animation: sunPulse 4s ease-in-out infinite;
+    z-index: 2;
+}
+
+/* PLANETS - ORBITING AROUND CENTER */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+}
+
+.planet.mercury {
+    width: 12px;
+    height: 12px;
+    background: #8c7853;
+    animation: orbitMercury 8s linear infinite;
+    box-shadow: 0 0 10px rgba(140, 120, 83, 0.5);
+    transform: translate(-50%, -50%) translateX(150px);
+}
+
+.planet.venus {
+    width: 18px;
+    height: 18px;
+    background: #ffc649;
+    animation: orbitVenus 12s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 198, 73, 0.5);
+    transform: translate(-50%, -50%) translateX(200px);
+}
+
+.planet.earth {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #6b93d6, #4d648d, #2e8b57);
+    animation: orbitEarth 15s linear infinite;
+    box-shadow: 0 0 20px rgba(107, 147, 214, 0.6);
+    transform: translate(-50%, -50%) translateX(250px);
+}
+
+.planet.mars {
+    width: 16px;
+    height: 16px;
+    background: #cd5c5c;
+    animation: orbitMars 20s linear infinite;
+    box-shadow: 0 0 12px rgba(205, 92, 92, 0.5);
+    transform: translate(-50%, -50%) translateX(300px);
+}
+
+.planet.jupiter {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(45deg, #d8ca9d, #fab981);
+    animation: orbitJupiter 25s linear infinite;
+    box-shadow: 0 0 25px rgba(216, 202, 157, 0.4);
+    transform: translate(-50%, -50%) translateX(380px);
+}
+
+.planet.saturn {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #fad5a5, #f4a460);
+    animation: orbitSaturn 30s linear infinite;
+    box-shadow: 0 0 20px rgba(250, 213, 165, 0.4);
+    position: absolute;
+    transform: translate(-50%, -50%) translateX(450px);
+}
+
+.planet.saturn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fad5a5, transparent);
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+/* ASTEROID BELT */
+.asteroid {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #8b8680;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 2px rgba(139, 134, 128, 0.8);
+    top: 50%;
+    left: 50%;
+}
+
+.asteroid:nth-child(8) { 
+    transform: translate(-50%, -50%) translateX(320px) rotate(0deg);
+    animation: asteroidFloat1 40s linear infinite; 
+}
+
+.asteroid:nth-child(9) { 
+    transform: translate(-50%, -50%) translateX(330px) rotate(72deg);
+    animation: asteroidFloat2 35s linear infinite; 
+    animation-delay: -10s; 
+}
+
+.asteroid:nth-child(10) { 
+    transform: translate(-50%, -50%) translateX(340px) rotate(144deg);
+    animation: asteroidFloat3 45s linear infinite; 
+    animation-delay: -20s; 
+}
+
+.asteroid:nth-child(11) { 
+    transform: translate(-50%, -50%) translateX(335px) rotate(216deg);
+    animation: asteroidFloat4 38s linear infinite; 
+    animation-delay: -15s; 
+}
+
+.asteroid:nth-child(12) { 
+    transform: translate(-50%, -50%) translateX(325px) rotate(288deg);
+    animation: asteroidFloat5 42s linear infinite; 
+    animation-delay: -25s; 
+}
+
+/* SPACE STARS FIELD */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #ddd, transparent),
+        radial-gradient(1px 1px at 200px 120px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 250px 50px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 300px 90px, #fff, transparent);
+    background-repeat: repeat;
+    background-size: 350px 200px;
+    animation: starField 60s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+/* NEBULA CLOUDS */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(75, 0, 130, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 80%, rgba(25, 25, 112, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 30%, rgba(72, 61, 139, 0.08) 0%, transparent 50%);
+    animation: nebulaFloat 45s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/*TRANSITION*/
+a,
+.btn {
+    transition: all 300ms ease;
+}
+
+/*DESKTOP NAV - COMPLETELY TRANSPARENT*/
+nav,
+.nav-links {
+    display: flex;
+}
+
+nav {
+    justify-content: space-around;
+    align-items: center;
+    height: 17vh;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(2px);
+    margin: 1rem 8rem;
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+}
+
+.nav-links {
+    gap: 2rem;
+    list-style: none;
+    font-size: 1.5rem;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    text-decoration-color: transparent;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #da70d6;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    text-decoration-color: #da70d6;
+    text-shadow: 0 0 10px rgba(218, 112, 214, 0.8);
+}
+
+.logo {
+    font-size: 2rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+}
+
+.logo:hover {
+    cursor: default;
+}
+
+/*HAMBURGER-MENU*/
+#hamburger-nav {
+    display: none;
+}
+
+.hamburger-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.hamburger-icon span {
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.5);
+}
+
+.menu-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    width: fit-content;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.menu-links a {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-links li {
+    list-style: none;
+}
+
+.menu-links.open {
+    max-height: 300px;
+}
+
+.hamburger-icon.open span:first-child {
+    transform: rotate(45deg) translate(10px, 5px);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-icon.open span:last-child {
+    transform: rotate(-45deg) translate(10px, -5px);
+}
+
+/*SECTIONS - COMPLETELY TRANSPARENT*/
+section {
+    padding: 4vh 2rem;
+    margin: 2rem 8rem;
+    box-sizing: border-box;
+    min-height: fit-content;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+    z-index: 10;
+}
+
+.section-container {
+    display: flex;
+}
+
+/*PROFILE SECTION*/
+#profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    min-height: 70vh;
+    padding: 3rem 0;
+}
+
+.section__pic-container {
+    display: flex;
+    max-width: 350px;
+    height: 350px;
+    width: 100%;
+    margin: auto 0;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* WHITE CIRCULAR BACKGROUND FOR PROFILE PICTURE */
+.section__pic-container::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.6) 30%,
+        rgba(255, 255, 255, 0.3) 60%,
+        rgba(255, 255, 255, 0.1) 80%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    animation: whiteGlow 6s ease-in-out infinite;
+    z-index: -1;
+    filter: blur(3px);
+}
+
+.section__text {
+    align-self: center;
+    text-align: center;
+}
+
+.section__text p {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.section__text__p1 {
+    text-align: center;
+    color: #da70d6;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 0 0 10px rgba(218, 112, 214, 0.8);
+}
+
+.section__text__p2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    background: linear-gradient(45deg, #da70d6, #9370db, #4b0082, #8a2be2);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: cosmicText 4s ease-in-out infinite;
+}
+
+#socials-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    z-index: 2;
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.about-pic {
+    border-radius: 2rem;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(218, 112, 214, 0.2);
+}
+
+/*ICON*/
+.icon {
+    cursor: pointer;
+    height: 2rem;
+    filter: drop-shadow(0 0 10px rgba(218, 112, 214, 0.6));
+    transition: all 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.8));
+}
+
+/*BUTTON*/
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    font-weight: 600;
+    transition: all 300ms ease;
+    padding: 1rem;
+    width: 8rem;
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(218, 112, 214, 0.3);
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+.btn-color-1,
+.btn-color-2 {
+    border: rgba(218, 112, 214, 0.3) 0.2rem solid;
+}
+
+.btn-color-1:hover,
+.btn-color-2:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(218, 112, 214, 0.1);
+    border: rgba(218, 112, 214, 0.5) 0.2rem solid;
+}
+
+.btn-color-1,
+.btn-color-2:hover {
+    background: rgba(138, 43, 226, 0.1);
+    color: white;
+}
+
+.btn-color-1:hover {
+    background: rgba(218, 112, 214, 0.1);
+}
+
+.btn-color-2 {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/*ABOUT SECTION*/
+#about {
+    position: relative;
+}
+
+.about-container {
+    gap: 3rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.about-details-container {
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.about-container, 
+.about-details-container {
+    display: flex;
+}
+
+.section-container {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.about-pic {
+    border-radius: 2rem;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    position: relative;
+}
+
+.section__pic-container.about-pic-container {
+    position: relative;
+    max-width: 300px;
+    height: auto;
+}
+
+.arrow {
+    position: absolute;
+    right: -5rem;
+    bottom: 2.5rem;
+    filter: drop-shadow(0 0 15px rgba(218, 112, 214, 0.8));
+    animation: arrowPulse 3s ease-in-out infinite;
+}
+
+.details-container {
+    padding: 1.5rem;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    text-align: center;
+    margin: 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.details-container:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(218, 112, 214, 0.1);
+}
+
+/*EXPERIENCE SECTION*/
+#experience {
+    position: relative;
+}
+
+.experience-sub-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    font-family: 'Orbitron', monospace;
+    text-shadow: 0 0 10px rgba(218, 112, 214, 0.6);
+}
+
+.experience-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.experience-details-container .about-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.article-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+} 
+
+article.icon {
+    cursor: default;
+}
+
+.article-container article {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(1px);
+}
+
+.article-container article:hover {
+    background: rgba(255, 255, 255, 0.02);
+    transform: translateX(10px);
+    border: 1px solid rgba(218, 112, 214, 0.1);
+}
+
+/*PROJECTS SECTION*/
+#projects {
+    position: relative;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(218, 112, 214, 0.1);
+}
+
+.project-image-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(1px);
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.project-img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
+.project-title {
+    color: #fff;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(218, 112, 214, 0.6);
+    margin: 0;
+    text-align: center;
+}
+
+.project-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
+    flex: 1;
+    margin: 0;
+}
+
+.project-card .btn-container {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.project-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+    width: auto;
+    min-width: 80px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(218, 112, 214, 0.2);
+    color: #fff;
+    border-radius: 1.5rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(1px);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.project-btn:hover {
+    background: rgba(218, 112, 214, 0.05);
+    transform: translateY(-2px);
+    border: 1px solid rgba(218, 112, 214, 0.3);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+/*CERTIFICATIONS SECTION*/
+#certifications {
+    position: relative;
+}
+
+/*CONTACT SECTION*/
+#contact {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.contact-info-upper-container {
+    display: flex;
+    justify-content: center;
+    border-radius: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    padding: 0.5rem;
+    margin: 2rem auto;
+}
+
+.contact-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact-info-container:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(218, 112, 214, 0.1);
+}
+
+.contact-info-container p {
+    font-size: larger;
+    position: relative;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-info-container a {
+    color: #da70d6;
+    text-decoration: none;
+}
+
+.contact-info-container a:hover {
+    color: #ba55d3;
+    text-shadow: 0 0 10px rgba(186, 85, 211, 0.8);
+}
+
+.contact-icon {
+    cursor: default;
+    height: 2rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(218, 112, 214, 0.6));
+}
+
+.email-icon {
+    height: 2.5rem;
+}
+
+/*FOOTER - COMPLETELY TRANSPARENT*/
+footer { 
+    margin: 2rem 8rem;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    padding: 3rem 0;
+    position: relative;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Orbitron', monospace;
+}
+
+.text-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(1px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+}
+
+.text-container p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 1;
+}
+
+/* SOLAR SYSTEM ANIMATIONS - CENTERED ORBITS */
+@keyframes sunPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 
+            0 0 60px #ffeb3b,
+            0 0 120px #ff9800,
+            0 0 180px #ff5722;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 
+            0 0 80px #ffeb3b,
+            0 0 140px #ff9800,
+            0 0 200px #ff5722;
+    }
+}
+
+@keyframes orbitMercury {
+    0% {
+        transform: translate(-50%, -50%) translateX(150px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(150px) rotate(360deg);
+    }
+}
+
+@keyframes orbitVenus {
+    0% {
+        transform: translate(-50%, -50%) translateX(200px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(200px) rotate(-360deg);
+    }
+}
+
+@keyframes orbitEarth {
+    0% {
+        transform: translate(-50%, -50%) translateX(250px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(250px) rotate(360deg);
+    }
+}
+
+@keyframes orbitMars {
+    0% {
+        transform: translate(-50%, -50%) translateX(300px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(300px) rotate(-360deg);
+    }
+}
+
+@keyframes orbitJupiter {
+    0% {
+        transform: translate(-50%, -50%) translateX(380px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(380px) rotate(360deg);
+    }
+}
+
+@keyframes orbitSaturn {
+    0% {
+        transform: translate(-50%, -50%) translateX(450px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(450px) rotate(-360deg);
+    }
+}
+
+@keyframes asteroidFloat1 {
+    0% {
+        transform: translate(-50%, -50%) translateX(320px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(320px) rotate(360deg);
+    }
+}
+
+@keyframes asteroidFloat2 {
+    0% {
+        transform: translate(-50%, -50%) translateX(330px) rotate(72deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(330px) rotate(432deg);
+    }
+}
+
+@keyframes asteroidFloat3 {
+    0% {
+        transform: translate(-50%, -50%) translateX(340px) rotate(144deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(340px) rotate(504deg);
+    }
+}
+
+@keyframes asteroidFloat4 {
+    0% {
+        transform: translate(-50%, -50%) translateX(335px) rotate(216deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(335px) rotate(576deg);
+    }
+}
+
+@keyframes asteroidFloat5 {
+    0% {
+        transform: translate(-50%, -50%) translateX(325px) rotate(288deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(325px) rotate(648deg);
+    }
+}
+
+@keyframes starField {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-200px);
+    }
+}
+
+@keyframes nebulaFloat {
+    0%, 100% {
+        transform: translate(0px, 0px) scale(1);
+        opacity: 0.1;
+    }
+    33% {
+        transform: translate(30px, -30px) scale(1.1);
+        opacity: 0.15;
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+        opacity: 0.1;
+    }
+}
+
+/* WHITE GLOW ANIMATION FOR PROFILE PICTURE */
+@keyframes whiteGlow {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes cosmicText {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes arrowPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(218, 112, 214, 0.8));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px rgba(138, 43, 226, 1));
+    }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    nav {
+        margin: 1rem 4rem;
+    }
+    
+    section {
+        margin: 2rem 4rem;
+    }
+    
+    footer {
+        margin: 2rem 4rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .project-card {
+        max-width: 100%;
+    }
+    
+    .arrow {
+        right: -3rem;
+    }
+}
+
+@media (max-width: 992px) {
+    /* HIDE DESKTOP NAV, SHOW HAMBURGER */
+    #desktop-nav {
+        display: none;
+    }
+    
+    #hamburger-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 15vh;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(2px);
+        margin: 1rem 2rem;
+        padding: 0 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        position: sticky;
+        top: 1rem;
+        z-index: 100;
+    }
+    
+    /* PROFILE SECTION RESPONSIVE */
+    #profile {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    
+    .section__pic-container {
+        max-width: 250px;
+        height: 250px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .section__text__p2 {
+        font-size: 1.4rem;
+    }
+    
+    /* ABOUT SECTION RESPONSIVE */
+    .section-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .about-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .details-container {
+        margin: 0.5rem;
+    }
+    
+    .arrow {
+        position: static;
+        margin: 2rem auto 0;
+        display: block;
+    }
+    
+    /* EXPERIENCE SECTION RESPONSIVE */
+    .experience-details-container .about-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .article-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+    }
+    
+    /* PROJECTS RESPONSIVE */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .project-card {
+        max-width: 100%;
+        margin: 0;
+    }
+    
+    /* CONTACT RESPONSIVE */
+    .contact-info-upper-container {
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem auto;
+    }
+    
+    .contact-info-container {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* HIDE SOLAR SYSTEM ON MOBILE */
+    .solar-system,
+    body::before,
+    body::after {
+        display: none;
+    }
+    
+    /* NAVIGATION */
+    nav, #hamburger-nav {
+        margin: 0.5rem 1rem;
+        height: 12vh;
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    /* SECTIONS */
+    section {
+        margin: 1rem;
+        padding: 2rem 1rem;
+    }
+    
+    footer {
+        margin: 1rem;
+        padding: 2rem 0;
+    }
+    
+    /* PROFILE */
+    .section__pic-container {
+        max-width: 200px;
+        height: 200px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .section__text__p2 {
+        font-size: 1.2rem;
+    }
+    
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .btn {
+        width: 10rem;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* PROJECT CARDS */
+    .project-image-container {
+        height: 160px;
+    }
+    
+    .project-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        min-width: 70px;
+    }
+    
+    .project-card .btn-container {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    
+    /* EXPERIENCE */
+    .experience-sub-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .article-container {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .article-container article {
+        padding: 0.6rem;
+        gap: 0.8rem;
+    }
+    
+    /* CONTACT */
+    .contact-info-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+    
+    .contact-info-container p {
+        font-size: medium;
+    }
+    
+    /* TEXT */
+    .text-container {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .text-container p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    /* EXTRA SMALL SCREENS */
+    .title {
+        font-size: 1.7rem;
+    }
+    
+    .section__text__p2 {
+        font-size: 1rem;
+    }
+    
+    .logo {
+        font-size: 1.1rem;
+    }
+    
+    section {
+        padding: 1.5rem 0.8rem;
+        margin: 0.8rem;
+    }
+    
+    .btn {
+        width: 9rem;
+        padding: 0.7rem;
+        font-size: 0.8rem;
+    }
+    
+    .project-card {
+        padding: 1rem;
+    }
+    
+    .project-image-container {
+        height: 140px;
+    }
+    
+    .experience-sub-title {
+        font-size: 1.2rem;
+    }
+    
+    .contact-info-container p {
+        font-size: small;
+    }
+}
+
+/* ACCESSIBILITY - RESPECT REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    body::before,
+    body::after,
+    .solar-system * {
+        animation: none !important;
+    }
+}

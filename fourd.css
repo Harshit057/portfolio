@@ -1,0 +1,435 @@
+/* 4D CARD STYLING & GAME EFFECTS */
+
+/* 4D Perspective Container */
+.section {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+/* Base 4D Card Styling - With Dynamic Gradient Backgrounds */
+.details-container,
+.color-container,
+.contact-info-container {
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+  
+  /* Dynamic Gradient Background */
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6741 50%, #566573 75%, #2c3e50 100%);
+  background-size: 400% 400%;
+  animation: cardGradientShift 20s ease-in-out infinite;
+  
+  /* Glass Morphism Effect */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(44, 62, 80, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Different Animation Delays for Visual Variety */
+.details-container {
+  animation: floating4DGradient 6s ease-in-out infinite, cardGradientShift 20s ease-in-out infinite;
+  animation-delay: 0s, 0s;
+}
+
+.color-container {
+  animation: floating4DGradient 6s ease-in-out infinite, cardGradientShift 20s ease-in-out infinite;
+  animation-delay: 1s, 5s;
+}
+
+.contact-info-container {
+  animation: floating4DGradient 6s ease-in-out infinite, cardGradientShift 20s ease-in-out infinite;
+  animation-delay: 2s, 10s;
+}
+
+/* Card Gradient Animation - Same as Background */
+@keyframes cardGradientShift {
+  0% {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6741 50%, #566573 75%, #2c3e50 100%);
+  }
+  20% {
+    background: linear-gradient(135deg, #34495e 0%, #4a6741 25%, #566573 50%, #5d6d7e 75%, #34495e 100%);
+  }
+  40% {
+    background: linear-gradient(135deg, #4a6741 0%, #566573 25%, #5d6d7e 50%, #85929e 75%, #4a6741 100%);
+  }
+  60% {
+    background: linear-gradient(135deg, #566573 0%, #5d6d7e 25%, #85929e 50%, #717d7e 75%, #566573 100%);
+  }
+  80% {
+    background: linear-gradient(135deg, #5d6d7e 0%, #85929e 25%, #717d7e 50%, #2c3e50 75%, #5d6d7e 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a6741 50%, #566573 75%, #2c3e50 100%);
+  }
+}
+
+/* Enhanced 4D Depth Effect with Gradient Shadows */
+.details-container::after,
+.color-container::after,
+.contact-info-container::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: -8px;
+  bottom: -8px;
+  background: linear-gradient(135deg, 
+    rgba(44, 62, 80, 0.4),
+    rgba(52, 73, 94, 0.3),
+    rgba(74, 103, 65, 0.3),
+    rgba(86, 101, 115, 0.4)
+  );
+  background-size: 400% 400%;
+  animation: cardGradientShift 25s ease-in-out infinite;
+  border-radius: 2rem;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.7;
+  transform: translateZ(-20px) rotateX(5deg);
+  transition: all 0.4s ease;
+}
+
+/* Enhanced 4D Hover States with Gradient Intensification */
+.details-container:hover {
+  transform: 
+    translateY(-15px) 
+    translateZ(30px) 
+    rotateX(8deg) 
+    rotateY(-3deg)
+    scale(1.02);
+  background: linear-gradient(135deg, #34495e 0%, #4a6741 25%, #566573 50%, #5d6d7e 75%, #34495e 100%);
+  background-size: 200% 200%;
+  box-shadow: 
+    0 25px 50px rgba(44, 62, 80, 0.5),
+    0 15px 30px rgba(52, 73, 94, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(44, 62, 80, 0.3);
+  animation: gamingGlowGradient 2s ease-in-out infinite, tiltGame 2s ease-in-out infinite;
+}
+
+.color-container:hover {
+  transform: 
+    translateY(-20px) 
+    translateZ(40px) 
+    rotateX(-5deg) 
+    rotateY(8deg)
+    scale(1.03);
+  background: linear-gradient(135deg, #4a6741 0%, #566573 25%, #5d6d7e 50%, #85929e 75%, #4a6741 100%);
+  background-size: 200% 200%;
+  box-shadow: 
+    0 30px 60px rgba(44, 62, 80, 0.6),
+    0 20px 40px rgba(52, 73, 94, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -3px 0 rgba(74, 103, 65, 0.3);
+  animation: gamingGlowGradient 2s ease-in-out infinite, pulse4D 2s ease-in-out infinite;
+}
+
+.contact-info-container:hover {
+  transform: 
+    translateY(-12px) 
+    translateZ(25px) 
+    rotateX(12deg) 
+    rotateY(-6deg)
+    scale(1.05);
+  background: linear-gradient(135deg, #566573 0%, #5d6d7e 25%, #85929e 50%, #717d7e 75%, #566573 100%);
+  background-size: 200% 200%;
+  box-shadow: 
+    0 20px 40px rgba(44, 62, 80, 0.5),
+    0 12px 25px rgba(86, 101, 115, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  animation: gamingGlowGradient 2s ease-in-out infinite;
+}
+
+/* 4D Depth Shadow Animation */
+.details-container:hover::after,
+.color-container:hover::after,
+.contact-info-container:hover::after {
+  transform: translateZ(-40px) rotateX(15deg) scale(1.1);
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* GAME-LIKE INTERACTIVE EFFECTS */
+
+/* Enhanced Floating Animation with Gradient Pulse */
+@keyframes floating4DGradient {
+  0% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    background-size: 400% 400%;
+  }
+  33% {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
+    background-size: 300% 300%;
+  }
+  66% {
+    transform: translateY(-4px) rotateX(-1deg) rotateY(2deg);
+    background-size: 350% 350%;
+  }
+  100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    background-size: 400% 400%;
+  }
+}
+
+/* Pulse Effect */
+@keyframes pulse4D {
+  0% {
+    transform: scale(1) rotateX(0deg);
+    box-shadow: 0 0 0 0 rgba(44, 62, 80, 0.4);
+  }
+  50% {
+    transform: scale(1.02) rotateX(3deg);
+    box-shadow: 0 0 20px 10px rgba(44, 62, 80, 0.2);
+  }
+  100% {
+    transform: scale(1) rotateX(0deg);
+    box-shadow: 0 0 0 0 rgba(44, 62, 80, 0);
+  }
+}
+
+/* Tilt Game Effect */
+@keyframes tiltGame {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  25% { transform: rotateX(5deg) rotateY(-3deg); }
+  50% { transform: rotateX(-3deg) rotateY(5deg); }
+  75% { transform: rotateX(3deg) rotateY(-2deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg); }
+}
+
+/* Game-like Click Effects */
+.details-container:active,
+.color-container:active,
+.contact-info-container:active {
+  transform: 
+    translateY(-5px) 
+    translateZ(10px) 
+    rotateX(15deg) 
+    scale(0.98);
+  transition: all 0.1s ease;
+}
+
+/* Profile Picture - 4D Sphere Effect */
+.section__pic-container {
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.section__pic-container:hover {
+  transform: 
+    translateZ(30px) 
+    rotateY(15deg) 
+    rotateX(10deg)
+    scale(1.05);
+  filter: drop-shadow(0 20px 40px rgba(44, 62, 80, 0.4));
+}
+
+/* Enhanced Button 4D Effects with Gradients */
+.btn {
+  transform-style: preserve-3d;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: linear-gradient(135deg, #2c3e50, #34495e, #4a6741);
+  background-size: 300% 300%;
+  animation: cardGradientShift 18s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(135deg, 
+    rgba(44, 62, 80, 0.4),
+    rgba(52, 73, 94, 0.3)
+  );
+  border-radius: 2rem;
+  z-index: -1;
+  filter: blur(4px);
+  opacity: 0.5;
+  transform: translateZ(-10px);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: 
+    translateY(-8px) 
+    translateZ(20px) 
+    rotateX(10deg)
+    scale(1.05);
+  background: linear-gradient(135deg, #34495e, #4a6741, #566573);
+  background-size: 150% 150%;
+}
+
+.btn:hover::after {
+  transform: translateZ(-20px) scale(1.1);
+  opacity: 0.7;
+  filter: blur(8px);
+}
+
+.btn:active {
+  transform: 
+    translateY(-3px) 
+    translateZ(5px) 
+    rotateX(5deg)
+    scale(0.98);
+}
+
+/* Enhanced Navigation 4D Effect */
+nav {
+  transform-style: preserve-3d;
+  transition: all 0.4s ease;
+}
+
+nav:hover {
+  transform: translateZ(10px) rotateX(2deg);
+  box-shadow: 
+    0 15px 30px rgba(31, 38, 135, 0.4),
+    0 8px 16px rgba(44, 62, 80, 0.2);
+}
+
+/* Enhanced Text Container with Gradient Background */
+.text-container {
+  transform-style: preserve-3d;
+  transition: all 0.4s ease;
+  background: linear-gradient(135deg, 
+    rgba(44, 62, 80, 0.15),
+    rgba(52, 73, 94, 0.15),
+    rgba(74, 103, 65, 0.15),
+    rgba(86, 101, 115, 0.15)
+  );
+  background-size: 400% 400%;
+  animation: cardGradientShift 22s ease-in-out infinite;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.text-container:hover {
+  transform: translateZ(15px) rotateX(5deg);
+  background: linear-gradient(135deg, 
+    rgba(52, 73, 94, 0.25),
+    rgba(74, 103, 65, 0.25),
+    rgba(86, 101, 115, 0.25),
+    rgba(93, 109, 126, 0.25)
+  );
+  background-size: 200% 200%;
+}
+
+/* Arrow 4D Gaming Effect */
+.arrow {
+  transform-style: preserve-3d;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.arrow:hover {
+  transform: 
+    translateY(-10px) 
+    translateZ(25px) 
+    rotateX(15deg) 
+    rotateZ(5deg)
+    scale(1.2);
+  filter: drop-shadow(0 15px 30px rgba(44, 62, 80, 0.5));
+}
+
+.arrow:active {
+  transform: 
+    translateY(-5px) 
+    translateZ(10px) 
+    rotateX(8deg)
+    scale(1.1);
+}
+
+/* ADVANCED 4D GAMING INTERACTIONS */
+
+/* Mouse Movement Tilt Effect */
+.details-container,
+.color-container {
+  transition: transform 0.1s ease-out;
+}
+
+/* Add this to enable mouse tracking - requires JavaScript */
+.card-3d-tilt {
+  will-change: transform;
+}
+
+/* Enhanced Gaming Glow with Gradient Colors */
+@keyframes gamingGlowGradient {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(44, 62, 80, 0.4),
+      0 0 40px rgba(52, 73, 94, 0.3),
+      0 0 60px rgba(74, 103, 65, 0.2);
+    background-size: 400% 400%;
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(52, 73, 94, 0.5),
+      0 0 60px rgba(74, 103, 65, 0.4),
+      0 0 90px rgba(86, 101, 115, 0.3);
+    background-size: 200% 200%;
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(44, 62, 80, 0.4),
+      0 0 40px rgba(52, 73, 94, 0.3),
+      0 0 60px rgba(74, 103, 65, 0.2);
+    background-size: 400% 400%;
+  }
+}
+
+/* Enhanced Article Container Effects */
+.article-container article {
+  transition: all 0.3s ease;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.article-container article:hover {
+  transform: translateX(8px);
+  background: linear-gradient(90deg, 
+    rgba(44, 62, 80, 0.15),
+    rgba(52, 73, 94, 0.10),
+    rgba(74, 103, 65, 0.15)
+  );
+  box-shadow: 
+    0 8px 20px rgba(44, 62, 80, 0.2),
+    0 4px 10px rgba(52, 73, 94, 0.15),
+    inset 0 0 25px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Performance Optimizations */
+.details-container,
+.color-container,
+.contact-info-container,
+.btn,
+.section__pic-container,
+.arrow,
+.text-container {
+  will-change: transform, box-shadow, filter, background;
+  backface-visibility: hidden;
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .details-container,
+  .color-container,
+  .contact-info-container {
+    animation: none !important;
+  }
+  
+  .details-container:hover,
+  .color-container:hover,
+  .contact-info-container:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+  }
+}

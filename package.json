@@ -1,0 +1,24 @@
+{
+  "name": "html-css-js-portfolio",
+  "version": "1.0.0",
+  "description": "AI/ML Engineer Portfolio with 3D Solar System and 4D Effects",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server",
+    "build": "echo 'No build process required for static site'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "portfolio",
+    "html",
+    "css",
+    "javascript",
+    "responsive",
+    "3d-animation"
+  ],
+  "author": "Harshit Sharma",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
