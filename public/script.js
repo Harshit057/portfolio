@@ -4,7 +4,6 @@ function toggleMenu() {
     menu.classList.toggle("open");
     icon.classList.toggle("open");
 }
-// ...existing code...
 
 // 4D CARD TILT EFFECT
 function init4DTilt() {
@@ -148,8 +147,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// IMPROVED BUTTON INTERACTIONS
+function initButtonInteractions() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+        // Add touch support
+        button.addEventListener('touchstart', handleButtonPress, { passive: true });
+        button.addEventListener('touchend', handleButtonRelease, { passive: true });
+        button.addEventListener('touchcancel', handleButtonRelease, { passive: true });
+        
+        // Add mouse support
+        button.addEventListener('mousedown', handleButtonPress);
+        button.addEventListener('mouseup', handleButtonRelease);
+        button.addEventListener('mouseleave', handleButtonRelease);
+        
+        // Prevent double-tap zoom on mobile
+        button.addEventListener('touchend', function(e) {
+            e.preventDefault();
+        });
+    });
+}
+
+function handleButtonPress(e) {
+    const button = e.currentTarget;
+    button.style.transform = 'translateY(1px) scale(0.98)';
+    button.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+    button.style.transition = 'all 150ms ease';
+}
+
+function handleButtonRelease(e) {
+    const button = e.currentTarget;
+    // Reset to hover state or normal state
+    if (e.type === 'mouseleave') {
+        button.style.transform = '';
+    } else {
+        // Keep the hover effect if mouse is still over the button
+        if (button.matches(':hover')) {
+            button.style.transform = 'translateY(-3px)';
+            button.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
+        } else {
+            button.style.transform = '';
+            button.style.boxShadow = '';
+        }
+    }
+    button.style.transition = 'all 300ms ease';
+}
+
 // Initialize all 4D effects
 document.addEventListener('DOMContentLoaded', function() {
     init4DTilt();
     addGameEffects();
+    initButtonInteractions();
 });
